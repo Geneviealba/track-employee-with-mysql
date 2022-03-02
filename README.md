@@ -20,3 +20,10 @@ Node.js - Used for package managment and to execute JavaScript code to build com
 Javascript - Used to base functionality of functions and prompts within the application.
 Git - Version control system to track changes to source code
 GitHub - Hosts repository that can be deployed to GitHub Pages
+
+Mock up 
+https://drive.google.com/file/d/1rEgnXPXCwL8M6blJgMQ7XrFLcqT0niCh/view
+
+
+https://user-images.githubusercontent.com/94097708/156457844-3a0d92f8-9263-4828-bc20-e707ea5f911c.mp4
+
