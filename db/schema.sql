@@ -1,17 +1,17 @@
 
-DROP DATABASE IF EXISTS employee_trackerDB;
+DROP DATABASE IF EXISTS employee_dataDB;
 
-CREATE DATABASE employee_trackerDB;
+CREATE DATABASE employee_dataDB;
 
-USE employee_trackerDB;
+USE employee_dataDB;
 
--- Table for the department----
+-- department table----
 CREATE TABLE department (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(30)
  
 );
--- Table for the departmen----
+-- role table
 CREATE TABLE role (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(30),
@@ -19,7 +19,7 @@ CREATE TABLE role (
   department_id INT,
   FOREIGN KEY (department_id) REFERENCES department(id)
 );
--- Table for employee role ----
+-- Table to create ----
 CREATE TABLE employee (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   first_name VARCHAR(30),
@@ -31,31 +31,31 @@ CREATE TABLE employee (
 
 );
 
--- Department seeds -----
-INSERT INTO department (name)
-VALUE ("Sales");
+-- create seeds -----
 INSERT INTO department (name)
 VALUE ("Engineering");
 INSERT INTO department (name)
-VALUE ("Finance");
+VALUE ("Sales");
 INSERT INTO department (name)
-VALUE ("Legal");
+VALUE ("Legal Team");
+INSERT INTO department (name)
+VALUE ("Finance");
 
 --Employee role seeds -------
 INSERT INTO role (title, salary, department_id)
-VALUE ("Lead Engineer", 170000, 2);
+VALUE ("Lead Engineer Developer", 900000, 2);
 INSERT INTO role (title, salary, department_id)
-VALUE ("Legal Team Lead", 250000, 4);
+VALUE ("Legal Team Lead", 780000, 4);
 INSERT INTO role (title, salary, department_id)
-VALUE ("Accountant", 130000, 3);
+VALUE ("Accountant", 200000, 3);
 INSERT INTO role (title, salary, department_id)
-VALUE ("Sales Lead", 100000, 1);
+VALUE ("Sales Lead", 110000, 1);
 INSERT INTO role (title, salary, department_id)
-VALUE ("Salesperson", 80000, 1);
+VALUE ("Salesperson", 130000, 1);
 INSERT INTO role (title, salary, department_id)
-VALUE ("Software Engineer", 120000, 2);
+VALUE ("Software Engineer", 180000, 2);
 INSERT INTO role (title, salary, department_id)
-VALUE ("Lawyer", 190000, 4);
+VALUE ("Lawyer", 230000, 4);
 
 -- EMPLOYEE SEEDS -------
 INSERT INTO employee (first_name, last_name, manager_id, role_id)

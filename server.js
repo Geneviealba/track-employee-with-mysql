@@ -1,14 +1,34 @@
 // Dependencies
 const inquirer = require("inquirer");
 const mysql = require("mysql")
-const cTable = require('console.table');
+const readTable = require('console.table');
+const logo = require("asciiart-logo");
+
+showLogo()
+start();
+
+function showLogo() {
+    console.log(
+        logo({
+            name: 'Employee Management System',
+            lineChars: 10,
+            padding: 2,
+            margin: 3,
+            borderColor: 'grey',
+            logoColor: 'white',
+            textColor: 'white',
+        })
+        .render()
+    );
+}
+
 
 const connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
     password:'password',
-    database: "employee_trackerDB"
+    database: "employee_dataDB"
   });
 
 
@@ -25,11 +45,11 @@ function startPrompt() {
     inquirer.prompt([
     {
     type: "list",
-    message: "What would you like to do?",
+    message: "Select From The List",
     name: "choice",
     choices: [
-              "View All Employees?", 
-              "View All Employee's By Roles?",
+              "View Departments", 
+              "View Employees By Roles?",
               "View all Emplyees By Deparments", 
               "Update Employee",
               "Add Employee?",
@@ -38,17 +58,17 @@ function startPrompt() {
               "Exit"
             ]
     }
-]).then(function(val) {
-        switch (val.choice) {
+]).then(function(user) {
+        switch (user.choice) {
             case "View All Employees?":
-              viewAllEmployees();
+              viewEmployees();
             break;
     
           case "View All Employee's By Roles?":
               viewAllRoles();
             break;
           case "View all Emplyees By Deparments":
-              viewAllDepartments();
+              viewDepartments();
             break;
           
           case "Add Employee?":
@@ -73,8 +93,8 @@ function startPrompt() {
             }
     })
 }
-// View All Employees //
-function viewAllEmployees() {
+// code to view All Employees //
+function viewEmployees() {
     connection.query("SELECT employee.first_name, employee.last_name, role.title, role.salary, department.name, CONCAT(e.first_name, ' ' ,e.last_name) AS Manager FROM employee INNER JOIN role on role.id = employee.role_id LEFT JOIN department on department.id = role.department_id left join employee e on employee.manager_id = e.id;", 
     function(err, res) {
       if (err) throw err
@@ -92,7 +112,7 @@ function viewAllRoles() {
   })
 }
 // View All Employees By Departments 
-function viewAllDepartments() {
+function viewDepartments() {
   connection.query("SELECT employee.first_name, employee.last_name, department.name AS Department FROM employee JOIN role ON employee.role_id = role.id JOIN department ON role.department_id = department.id ORDER BY employee.id;", 
   function(err, res) {
     if (err) throw err
